@@ -1,0 +1,298 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bank.dao.MessageBoardMapper">
+  <resultMap id="BaseResultMap" type="com.bank.bean.MessageBoard">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="MessUserName" jdbcType="VARCHAR" property="messusername" />
+    <result column="MessUserPhoneNum" jdbcType="VARCHAR" property="messuserphonenum" />
+    <result column="MessUserMessage" jdbcType="VARCHAR" property="messusermessage" />
+    <result column="adminMessage" jdbcType="VARCHAR" property="adminmessage" />
+    <result column="status" jdbcType="INTEGER" property="status" />
+    <result column="OpenId" jdbcType="VARCHAR" property="openid" />
+    <result column="MessDate" jdbcType="VARCHAR" property="messdate" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, MessUserName, MessUserPhoneNum, MessUserMessage, adminMessage, status, OpenId, 
+    MessDate
+  </sql>
+  <select id="selectByExample" parameterType="com.bank.bean.MessageBoardExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from messageboard
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from messageboard
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from messageboard
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.bank.bean.MessageBoardExample">
+    delete from messageboard
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.bank.bean.MessageBoard">
+    insert into messageboard (id, MessUserName, MessUserPhoneNum, 
+      MessUserMessage, adminMessage, status, 
+      OpenId, MessDate)
+    values (#{id,jdbcType=INTEGER}, #{messusername,jdbcType=VARCHAR}, #{messuserphonenum,jdbcType=VARCHAR}, 
+      #{messusermessage,jdbcType=VARCHAR}, #{adminmessage,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER}, 
+      #{openid,jdbcType=VARCHAR}, #{messdate,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.bank.bean.MessageBoard">
+    insert into messageboard
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="messusername != null">
+        MessUserName,
+      </if>
+      <if test="messuserphonenum != null">
+        MessUserPhoneNum,
+      </if>
+      <if test="messusermessage != null">
+        MessUserMessage,
+      </if>
+      <if test="adminmessage != null">
+        adminMessage,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="openid != null">
+        OpenId,
+      </if>
+      <if test="messdate != null">
+        MessDate,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="messusername != null">
+        #{messusername,jdbcType=VARCHAR},
+      </if>
+      <if test="messuserphonenum != null">
+        #{messuserphonenum,jdbcType=VARCHAR},
+      </if>
+      <if test="messusermessage != null">
+        #{messusermessage,jdbcType=VARCHAR},
+      </if>
+      <if test="adminmessage != null">
+        #{adminmessage,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="openid != null">
+        #{openid,jdbcType=VARCHAR},
+      </if>
+      <if test="messdate != null">
+        #{messdate,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.bank.bean.MessageBoardExample" resultType="java.lang.Long">
+    select count(*) from messageboard
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update messageboard
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.messusername != null">
+        MessUserName = #{record.messusername,jdbcType=VARCHAR},
+      </if>
+      <if test="record.messuserphonenum != null">
+        MessUserPhoneNum = #{record.messuserphonenum,jdbcType=VARCHAR},
+      </if>
+      <if test="record.messusermessage != null">
+        MessUserMessage = #{record.messusermessage,jdbcType=VARCHAR},
+      </if>
+      <if test="record.adminmessage != null">
+        adminMessage = #{record.adminmessage,jdbcType=VARCHAR},
+      </if>
+      <if test="record.status != null">
+        status = #{record.status,jdbcType=INTEGER},
+      </if>
+      <if test="record.openid != null">
+        OpenId = #{record.openid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.messdate != null">
+        MessDate = #{record.messdate,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update messageboard
+    set id = #{record.id,jdbcType=INTEGER},
+      MessUserName = #{record.messusername,jdbcType=VARCHAR},
+      MessUserPhoneNum = #{record.messuserphonenum,jdbcType=VARCHAR},
+      MessUserMessage = #{record.messusermessage,jdbcType=VARCHAR},
+      adminMessage = #{record.adminmessage,jdbcType=VARCHAR},
+      status = #{record.status,jdbcType=INTEGER},
+      OpenId = #{record.openid,jdbcType=VARCHAR},
+      MessDate = #{record.messdate,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.bank.bean.MessageBoard">
+    update messageboard
+    <set>
+      <if test="messusername != null">
+        MessUserName = #{messusername,jdbcType=VARCHAR},
+      </if>
+      <if test="messuserphonenum != null">
+        MessUserPhoneNum = #{messuserphonenum,jdbcType=VARCHAR},
+      </if>
+      <if test="messusermessage != null">
+        MessUserMessage = #{messusermessage,jdbcType=VARCHAR},
+      </if>
+      <if test="adminmessage != null">
+        adminMessage = #{adminmessage,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="openid != null">
+        OpenId = #{openid,jdbcType=VARCHAR},
+      </if>
+      <if test="messdate != null">
+        MessDate = #{messdate,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.bank.bean.MessageBoard">
+    update messageboard
+    set MessUserName = #{messusername,jdbcType=VARCHAR},
+      MessUserPhoneNum = #{messuserphonenum,jdbcType=VARCHAR},
+      MessUserMessage = #{messusermessage,jdbcType=VARCHAR},
+      adminMessage = #{adminmessage,jdbcType=VARCHAR},
+      status = #{status,jdbcType=INTEGER},
+      OpenId = #{openid,jdbcType=VARCHAR},
+      MessDate = #{messdate,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+
+  <!--分页查询数据，根据limit和page进行分页-->
+    <select id="queryData" parameterType="Map" resultType="com.bank.bean.MessageBoard">
+        SELECT id,MessUserName,MessUserPhoneNum,MessUserMessage,adminMessage,status,OpenId,MessDate
+        FROM  messageboard WHERE status=0 
+        <if test="page!=null and limit!=null">
+            limit #{page},#{limit}
+        </if>
+    </select>
+
+
+    <!--查询记录总数-->
+    <select id="queryCount"  resultType="java.lang.Integer">
+        SELECT count(*) FROM messageboard WHERE status=0
+    </select>
+    
+    <delete id="deleteMessageBoardById"  parameterType = "java.util.List">
+     delete from messageboard 
+
+      <foreach collection="ids" item="item_id" separator=","
+	 		open="where id in(" close=")">
+	 		#{item_id}
+	 	</foreach>
+      </delete>
+      
+      <select id="countMessageIndexData__Everyday"  resultType="java.lang.Integer" >
+        SELECT count(*) from messageboard WHERE TO_DAYS(MessDate)=TO_DAYS(#{format})
+    </select>
+  
+  
+   <select id="countMessageStatusIndexData"  resultType="java.lang.Integer" >
+         SELECT count(*) from messageboard WHERE status=#{i}
+    </select>
+    
+     <select id="countMessageIndexData"  resultType="java.lang.Integer" >
+        SELECT count(*) from messageboard WHERE TO_DAYS(#{format}) >= TO_DAYS(MessDate)
+    </select>
+
+</mapper>

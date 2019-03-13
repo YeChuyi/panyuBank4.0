@@ -1,0 +1,317 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bank.dao.PeLoOrderMapper">
+  <resultMap id="BaseResultMap" type="com.bank.bean.PeLoOrder">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="PeLoOrBusinessType" jdbcType="VARCHAR" property="peloorbusinesstype" />
+    <result column="PeLoOrDate" jdbcType="VARCHAR" property="peloordate" />
+    <result column="PeLoOrTime" jdbcType="VARCHAR" property="peloortime" />
+    <result column="PeLoOrName" jdbcType="VARCHAR" property="peloorname" />
+    <result column="PeLoOrDocumentType" jdbcType="VARCHAR" property="peloordocumenttype" />
+    <result column="PeLoOrDocumentNum" jdbcType="VARCHAR" property="peloordocumentnum" />
+    <result column="PeLoOrPhoneNum" jdbcType="VARCHAR" property="peloorphonenum" />
+    <result column="PeLoOrBookingOutlets" jdbcType="VARCHAR" property="peloorbookingoutlets" />
+    <result column="PeLoOrCreaterDate" jdbcType="VARCHAR" property="peloorcreaterdate" />
+    <result column="UserId" jdbcType="VARCHAR" property="userid" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, PeLoOrBusinessType, PeLoOrDate, PeLoOrTime, PeLoOrName, PeLoOrDocumentType, PeLoOrDocumentNum, 
+    PeLoOrPhoneNum, PeLoOrBookingOutlets, PeLoOrCreaterDate, UserId
+  </sql>
+  <select id="selectByExample" parameterType="com.bank.bean.PeLoOrderExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from peloorder
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from peloorder
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from peloorder
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.bank.bean.PeLoOrderExample">
+    delete from peloorder
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.bank.bean.PeLoOrder">
+    insert into peloorder (id, PeLoOrBusinessType, PeLoOrDate, 
+      PeLoOrTime, PeLoOrName, PeLoOrDocumentType, 
+      PeLoOrDocumentNum, PeLoOrPhoneNum, PeLoOrBookingOutlets, 
+      PeLoOrCreaterDate, UserId)
+    values (#{id,jdbcType=INTEGER}, #{peloorbusinesstype,jdbcType=VARCHAR}, #{peloordate,jdbcType=DATE}, 
+      #{peloortime,jdbcType=VARCHAR}, #{peloorname,jdbcType=VARCHAR}, #{peloordocumenttype,jdbcType=VARCHAR}, 
+      #{peloordocumentnum,jdbcType=VARCHAR}, #{peloorphonenum,jdbcType=VARCHAR}, #{peloorbookingoutlets,jdbcType=VARCHAR}, 
+      #{peloorcreaterdate,jdbcType=VARCHAR}, #{userid,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.bank.bean.PeLoOrder">
+    insert into peloorder
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="peloorbusinesstype != null">
+        PeLoOrBusinessType,
+      </if>
+      <if test="peloordate != null">
+        PeLoOrDate,
+      </if>
+      <if test="peloortime != null">
+        PeLoOrTime,
+      </if>
+      <if test="peloorname != null">
+        PeLoOrName,
+      </if>
+      <if test="peloordocumenttype != null">
+        PeLoOrDocumentType,
+      </if>
+      <if test="peloordocumentnum != null">
+        PeLoOrDocumentNum,
+      </if>
+      <if test="peloorphonenum != null">
+        PeLoOrPhoneNum,
+      </if>
+      <if test="peloorbookingoutlets != null">
+        PeLoOrBookingOutlets,
+      </if>
+      <if test="peloorcreaterdate != null">
+        PeLoOrCreaterDate,
+      </if>
+      <if test="userid != null">
+        UserId,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="peloorbusinesstype != null">
+        #{peloorbusinesstype,jdbcType=VARCHAR},
+      </if>
+      <if test="peloordate != null">
+        #{peloordate,jdbcType=DATE},
+      </if>
+      <if test="peloortime != null">
+        #{peloortime,jdbcType=VARCHAR},
+      </if>
+      <if test="peloorname != null">
+        #{peloorname,jdbcType=VARCHAR},
+      </if>
+      <if test="peloordocumenttype != null">
+        #{peloordocumenttype,jdbcType=VARCHAR},
+      </if>
+      <if test="peloordocumentnum != null">
+        #{peloordocumentnum,jdbcType=VARCHAR},
+      </if>
+      <if test="peloorphonenum != null">
+        #{peloorphonenum,jdbcType=VARCHAR},
+      </if>
+      <if test="peloorbookingoutlets != null">
+        #{peloorbookingoutlets,jdbcType=VARCHAR},
+      </if>
+      <if test="peloorcreaterdate != null">
+        #{peloorcreaterdate,jdbcType=VARCHAR},
+      </if>
+      <if test="userid != null">
+        #{userid,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.bank.bean.PeLoOrderExample" resultType="java.lang.Long">
+    select count(*) from peloorder
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update peloorder
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.peloorbusinesstype != null">
+        PeLoOrBusinessType = #{record.peloorbusinesstype,jdbcType=VARCHAR},
+      </if>
+      <if test="record.peloordate != null">
+        PeLoOrDate = #{record.peloordate,jdbcType=DATE},
+      </if>
+      <if test="record.peloortime != null">
+        PeLoOrTime = #{record.peloortime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.peloorname != null">
+        PeLoOrName = #{record.peloorname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.peloordocumenttype != null">
+        PeLoOrDocumentType = #{record.peloordocumenttype,jdbcType=VARCHAR},
+      </if>
+      <if test="record.peloordocumentnum != null">
+        PeLoOrDocumentNum = #{record.peloordocumentnum,jdbcType=VARCHAR},
+      </if>
+      <if test="record.peloorphonenum != null">
+        PeLoOrPhoneNum = #{record.peloorphonenum,jdbcType=VARCHAR},
+      </if>
+      <if test="record.peloorbookingoutlets != null">
+        PeLoOrBookingOutlets = #{record.peloorbookingoutlets,jdbcType=VARCHAR},
+      </if>
+      <if test="record.peloorcreaterdate != null">
+        PeLoOrCreaterDate = #{record.peloorcreaterdate,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userid != null">
+        UserId = #{record.userid,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update peloorder
+    set id = #{record.id,jdbcType=INTEGER},
+      PeLoOrBusinessType = #{record.peloorbusinesstype,jdbcType=VARCHAR},
+      PeLoOrDate = #{record.peloordate,jdbcType=DATE},
+      PeLoOrTime = #{record.peloortime,jdbcType=VARCHAR},
+      PeLoOrName = #{record.peloorname,jdbcType=VARCHAR},
+      PeLoOrDocumentType = #{record.peloordocumenttype,jdbcType=VARCHAR},
+      PeLoOrDocumentNum = #{record.peloordocumentnum,jdbcType=VARCHAR},
+      PeLoOrPhoneNum = #{record.peloorphonenum,jdbcType=VARCHAR},
+      PeLoOrBookingOutlets = #{record.peloorbookingoutlets,jdbcType=VARCHAR},
+      PeLoOrCreaterDate = #{record.peloorcreaterdate,jdbcType=VARCHAR},
+      UserId = #{record.userid,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.bank.bean.PeLoOrder">
+    update peloorder
+    <set>
+      <if test="peloorbusinesstype != null">
+        PeLoOrBusinessType = #{peloorbusinesstype,jdbcType=VARCHAR},
+      </if>
+      <if test="peloordate != null">
+        PeLoOrDate = #{peloordate,jdbcType=DATE},
+      </if>
+      <if test="peloortime != null">
+        PeLoOrTime = #{peloortime,jdbcType=VARCHAR},
+      </if>
+      <if test="peloorname != null">
+        PeLoOrName = #{peloorname,jdbcType=VARCHAR},
+      </if>
+      <if test="peloordocumenttype != null">
+        PeLoOrDocumentType = #{peloordocumenttype,jdbcType=VARCHAR},
+      </if>
+      <if test="peloordocumentnum != null">
+        PeLoOrDocumentNum = #{peloordocumentnum,jdbcType=VARCHAR},
+      </if>
+      <if test="peloorphonenum != null">
+        PeLoOrPhoneNum = #{peloorphonenum,jdbcType=VARCHAR},
+      </if>
+      <if test="peloorbookingoutlets != null">
+        PeLoOrBookingOutlets = #{peloorbookingoutlets,jdbcType=VARCHAR},
+      </if>
+      <if test="peloorcreaterdate != null">
+        PeLoOrCreaterDate = #{peloorcreaterdate,jdbcType=VARCHAR},
+      </if>
+      <if test="userid != null">
+        UserId = #{userid,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.bank.bean.PeLoOrder">
+    update peloorder
+    set PeLoOrBusinessType = #{peloorbusinesstype,jdbcType=VARCHAR},
+      PeLoOrDate = #{peloordate,jdbcType=DATE},
+      PeLoOrTime = #{peloortime,jdbcType=VARCHAR},
+      PeLoOrName = #{peloorname,jdbcType=VARCHAR},
+      PeLoOrDocumentType = #{peloordocumenttype,jdbcType=VARCHAR},
+      PeLoOrDocumentNum = #{peloordocumentnum,jdbcType=VARCHAR},
+      PeLoOrPhoneNum = #{peloorphonenum,jdbcType=VARCHAR},
+      PeLoOrBookingOutlets = #{peloorbookingoutlets,jdbcType=VARCHAR},
+      PeLoOrCreaterDate = #{peloorcreaterdate,jdbcType=VARCHAR},
+      UserId = #{userid,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+      <select id="countPeLoOrderIndexData"  resultType="java.lang.Integer" >
+         SELECT count(*) from   peloorder WHERE TO_DAYS(PeLoOrCreaterDate)=TO_DAYS(#{format})
+    </select>
+    
+       <select id="countPeLoOrderIndexData_All"  resultType="java.lang.Integer" >
+             SELECT count(*) from peloorder WHERE TO_DAYS(PeLoOrDate)>=TO_DAYS(NOW())
+    </select>
+    
+
+
+</mapper>

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+     <!-- 驼峰命名 -->
+	<settings>
+		<setting name="mapUnderscoreToCamelCase" value="true"/>
+	</settings>
+	
+	<typeAliases>
+		<package name="com.bank.bean"/>
+	</typeAliases>
+	
+	
+	
+	<!--当reasonable:true时在pageNum<1会查询第一页，如果pageNum>pages会查询最后一页
+
+                也就是说当pageNum>你的最大页数时会返回最后一页的数据而不是返回null
+
+                禁用合理化时，如果pageNum<1或pageNum>pages会返回空数据
+
+                所以如果不希望这种情况则需要设置reasonable:false-->
+	<plugins>
+		<plugin interceptor="com.github.pagehelper.PageInterceptor">
+			<!--分页参数合理化  -->
+			<property name="reasonable" value="true"/>
+		</plugin>
+	</plugins>
+
+</configuration>
+

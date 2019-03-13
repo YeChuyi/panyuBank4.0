@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bank.dao.PeLoOrderNumMapper">
+  <resultMap id="BaseResultMap" type="com.bank.bean.PeLoOrderNum">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="date" jdbcType="DATE" property="date" />
+    <result column="week" jdbcType="VARCHAR" property="week" />
+    <result column="time" jdbcType="VARCHAR" property="time" />
+    <result column="num" jdbcType="INTEGER" property="num" />
+    <result column="open" jdbcType="VARCHAR" property="open" />
+    <result column="already" jdbcType="INTEGER" property="already" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, date, week, time, num, open, already
+  </sql>
+  <select id="selectByExample" parameterType="com.bank.bean.PeLoOrderNumExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from peloordernum
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from peloordernum
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from peloordernum
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.bank.bean.PeLoOrderNumExample">
+    delete from peloordernum
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.bank.bean.PeLoOrderNum">
+    insert into peloordernum (id, date, week, 
+      time, num, open, already
+      )
+    values (#{id,jdbcType=INTEGER}, #{date,jdbcType=DATE}, #{week,jdbcType=VARCHAR}, 
+      #{time,jdbcType=VARCHAR}, #{num,jdbcType=INTEGER}, #{open,jdbcType=VARCHAR}, #{already,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.bank.bean.PeLoOrderNum">
+    insert into peloordernum
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="date != null">
+        date,
+      </if>
+      <if test="week != null">
+        week,
+      </if>
+      <if test="time != null">
+        time,
+      </if>
+      <if test="num != null">
+        num,
+      </if>
+      <if test="open != null">
+        open,
+      </if>
+      <if test="already != null">
+        already,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="date != null">
+        #{date,jdbcType=DATE},
+      </if>
+      <if test="week != null">
+        #{week,jdbcType=VARCHAR},
+      </if>
+      <if test="time != null">
+        #{time,jdbcType=VARCHAR},
+      </if>
+      <if test="num != null">
+        #{num,jdbcType=INTEGER},
+      </if>
+      <if test="open != null">
+        #{open,jdbcType=VARCHAR},
+      </if>
+      <if test="already != null">
+        #{already,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.bank.bean.PeLoOrderNumExample" resultType="java.lang.Long">
+    select count(*) from peloordernum
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update peloordernum
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.date != null">
+        date = #{record.date,jdbcType=DATE},
+      </if>
+      <if test="record.week != null">
+        week = #{record.week,jdbcType=VARCHAR},
+      </if>
+      <if test="record.time != null">
+        time = #{record.time,jdbcType=VARCHAR},
+      </if>
+      <if test="record.num != null">
+        num = #{record.num,jdbcType=INTEGER},
+      </if>
+      <if test="record.open != null">
+        open = #{record.open,jdbcType=VARCHAR},
+      </if>
+      <if test="record.already != null">
+        already = #{record.already,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update peloordernum
+    set id = #{record.id,jdbcType=INTEGER},
+      date = #{record.date,jdbcType=DATE},
+      week = #{record.week,jdbcType=VARCHAR},
+      time = #{record.time,jdbcType=VARCHAR},
+      num = #{record.num,jdbcType=INTEGER},
+      open = #{record.open,jdbcType=VARCHAR},
+      already = #{record.already,jdbcType=INTEGER}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.bank.bean.PeLoOrderNum">
+    update peloordernum
+    <set>
+      <if test="date != null">
+        date = #{date,jdbcType=DATE},
+      </if>
+      <if test="week != null">
+        week = #{week,jdbcType=VARCHAR},
+      </if>
+      <if test="time != null">
+        time = #{time,jdbcType=VARCHAR},
+      </if>
+      <if test="num != null">
+        num = #{num,jdbcType=INTEGER},
+      </if>
+      <if test="open != null">
+        open = #{open,jdbcType=VARCHAR},
+      </if>
+      <if test="already != null">
+        already = #{already,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.bank.bean.PeLoOrderNum">
+    update peloordernum
+    set date = #{date,jdbcType=DATE},
+      week = #{week,jdbcType=VARCHAR},
+      time = #{time,jdbcType=VARCHAR},
+      num = #{num,jdbcType=INTEGER},
+      open = #{open,jdbcType=VARCHAR},
+      already = #{already,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
