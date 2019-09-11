@@ -11,9 +11,9 @@ import java.util.Map;
 @RestController
 public class HelloController {
     //你好，控制层
-
     @RequestMapping("/hello")
     public String personalDetail(@RequestParam(value = "id") String id, Map<String, Object> map){
-        return "hello";
+        String a="bbbb";
+        return "hello,开发环境修改";
     }
 }
