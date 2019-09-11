@@ -14,6 +14,7 @@ public class HelloController {
 
     @RequestMapping("/hello")
     public String personalDetail(@RequestParam(value = "id") String id, Map<String, Object> map){
+        String b ="正式环境代码";
         return "hello";
     }
 }
