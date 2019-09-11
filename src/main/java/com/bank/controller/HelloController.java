@@ -14,6 +14,7 @@ public class HelloController {
     @RequestMapping("/hello")
     public String personalDetail(@RequestParam(value = "id") String id, Map<String, Object> map){
         String a="bbbb";
+        String c ="开发环境dev";
         return "hello,开发环境修改";
     }
 }
