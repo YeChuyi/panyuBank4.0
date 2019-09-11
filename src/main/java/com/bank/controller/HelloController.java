@@ -16,7 +16,7 @@ public class HelloController {
     public String personalDetail(@RequestParam(value = "id") String id, Map<String, Object> map){
         String b ="正式环境代码";
         String a="bbbb";
-        String c="第二次开发环境代码";
+        String c="第二次正式环境代码";
         return "hello,第一次开发环境和正式环境合并";
     }
 }
