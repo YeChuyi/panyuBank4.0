@@ -98,20 +98,16 @@ public class pageController {
 	
 	@RequestMapping("/SpeakReplied")
 	public String SpeakReplied(Map<String, Object> map){
-		
 		return "speakReplied";
-		
 	}
 	
 	
 	@RequestMapping("/speakReply")
 	public String speakReply(@RequestParam(value = "id") String id,Map<String, Object> map){
-		
 		Integer ids=Integer.valueOf(id);
 		MessageBoard messageBoard=messageBoardService.getMessageBoardById(ids);
 		map.put("messageBoard", messageBoard);
 		return "speakReply";
-		
 	}
 
 }

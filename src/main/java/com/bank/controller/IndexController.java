@@ -74,11 +74,7 @@ public class IndexController {
 	int countMessageYes = messageBoardService.countMessageStatusIndexData(1);
 	int countMessageNo = messageBoardService.countMessageStatusIndexData(0);
 
-	
-	
-	
-	
-	
+
     //打印测试
 //	System.out.println("date_Array的数据："+date_Array);
 //	System.out.println("countUser_Array的数据："+countUser_Array);
