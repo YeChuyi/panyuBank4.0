@@ -15,6 +15,7 @@ public class HelloController {
     @RequestMapping("/hello")
     public String personalDetail(@RequestParam(value = "id") String id, Map<String, Object> map){
         String b ="正式环境代码";
-        return "hello";
+        String a="bbbb";
+        return "hello,第一次开发环境和正式环境合并";
     }
 }

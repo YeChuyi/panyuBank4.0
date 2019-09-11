@@ -18,7 +18,6 @@ import com.bank.service.AdminService;
 
 
 @RequestMapping("/admin")
-
 @SessionAttributes("admin")
 @Controller
 public class AdminController {
