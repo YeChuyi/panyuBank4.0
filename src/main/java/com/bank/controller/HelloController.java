@@ -19,4 +19,10 @@ public class HelloController {
         String c="第二次正式环境代码";
         return "hello,第一次开发环境和正式环境合并";
     }
+
+    @RequestMapping("/hello2")
+    public String personalDetail2(@RequestParam(value = "id") String id, Map<String, Object> map){
+        String b ="美宝第一次提交";
+        return "hello,第一次开发环境和正式环境合并";
+    }
 }
